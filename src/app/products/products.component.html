@@ -1,0 +1,51 @@
+<div class="container py-5">
+
+    <div class="text-end mb-3">
+        <button class="btn btn-outline-secondary" routerLink="/add">Add new</button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th style="width: 20%;">Name</th>
+                        <th>Image</th>
+                        <th style="width: 20%;">Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Sub category</th>
+                        <th style="width: 130px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products; index as i">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{product.name}}</td>
+                        <td>
+                            <img [src]="product.image" alt="img" width="70" />
+                        </td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.subCategory}}</td>
+                        <td>
+                            <button 
+                                style="margin-right: 10px;"
+                                class="btn btn-outline-secondary" 
+                                [routerLink]="['/edit', product._id]">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button 
+                                class="btn btn-outline-danger" 
+                                (click)="deleteProduct(product)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

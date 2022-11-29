@@ -1,0 +1,14 @@
+<div class="py-5">
+  <div class="container">
+    <button 
+      class="btn btn-outline-secondary mb-3" 
+      (click)="clearSelection()">
+      Clear Selection
+    </button>
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      [rowData]="rowData$ | async"
+      [gridOptions]="gridOptions">
+    </ag-grid-angular>
+  </div>
+</div>

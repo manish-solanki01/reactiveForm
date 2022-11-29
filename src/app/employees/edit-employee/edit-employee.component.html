@@ -1,0 +1,78 @@
+<div class="container py-5" style="max-width: 600px;">
+
+  <h3 class="mb-3">
+      <span *ngIf="isAdd">Add employee</span>
+      <span *ngIf="!isAdd">Edit employee</span>
+  </h3>
+
+  <div class="card">
+      <div class="card-body">
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3 needs-validation" novalidate>
+
+              <div class="col-12">
+                  <label class="form-label">First name</label>
+                  <input 
+                      type="text" 
+                      formControlName="firstName" 
+                      class="form-control" 
+                      [ngClass]="{ 'is-invalid': submitted && f['firstName']['errors'] }"
+                      required>
+                  <div *ngIf="submitted && f['firstName']['errors']" class="invalid-feedback">
+                      <div *ngIf="f['firstName']['errors']['required']">First name is required</div>
+                  </div>
+              </div>
+
+              <div class="col-12">
+                  <label class="form-label">Last name</label>
+                  <input 
+                      type="text" 
+                      formControlName="lastName" 
+                      class="form-control" 
+                      [ngClass]="{ 'is-invalid': submitted && f['lastName']['errors'] }"
+                      required>
+                  <div *ngIf="submitted && f['lastName']['errors']" class="invalid-feedback">
+                      <div *ngIf="f['lastName']['errors']['required']">Last name is required</div>
+                  </div>
+              </div>
+
+              <div class="col-12">
+                  <label class="form-label">languages</label>
+                  <select 
+                    class="form-control" 
+                    formControlName="languages" 
+                    multiple
+                    [ngClass]="{ 'is-invalid': submitted && f['languages']['errors'] }"
+                    required>
+                    <option class="hidden" selected disabled>Please Languages You Know?</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                    <option value="Marathi">Marathi</option>
+                  </select>
+                  <div *ngIf="submitted && f['languages']['errors']" class="invalid-feedback">
+                      <div *ngIf="f['languages']['errors']['required']">languages is required</div>
+                  </div>
+              </div>
+
+
+              <div class="col-12">
+                  <button 
+                      type="submit" 
+                      class="btn btn-outline-primary">
+                      Save
+                  </button>
+                  <button 
+                      style="margin-left: 10px;"
+                      type="button" 
+                      (click)="previousState()" 
+                      class="btn btn-outline-secondary">
+                      Back
+                  </button>
+                  <button #reset hidden type="reset">reset</button>
+              </div>
+          </form>
+
+      </div>
+  </div>
+
+</div>

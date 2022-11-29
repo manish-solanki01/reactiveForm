@@ -1,0 +1,104 @@
+<div class="container py-5" style="max-width: 600px;">
+
+    <h3 class="mb-3">
+        <span *ngIf="isAdd">Add product</span>
+        <span *ngIf="!isAdd">Edit product</span>
+    </h3>
+
+    <div class="card">
+        <div class="card-body">
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3 needs-validation" novalidate>
+
+                <div class="col-12">
+                    <label class="form-label">Name</label>
+                    <input 
+                        type="text" 
+                        formControlName="name" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['name']['invalid'] && (f['name']['dirty'] || f['name']['touched']) }"
+                        required>
+                    <div *ngIf="f['name']['errors'] && (f['name']['dirty'] || f['name']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['name']['errors']['required']">Name is required</div>
+                        <div *ngIf="f['name']['errors']['minlength']">Name Must be at least 4 charecters long!</div>
+                        <div *ngIf="f['name']['errors']['pattern']">Name pattern is not valid</div>
+                        <div *ngIf="f['name']['errors']['nameNotAllowed']">This name is NOT allowed</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">File upload</label>
+                    <file-upload (changeUrl)="onChangeImage($event)" [imageUrl]="f['image']['value']"></file-upload>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Email</label>
+                    <input 
+                        type="email" 
+                        formControlName="email" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['email']['invalid'] && (f['email']['dirty'] || f['email']['touched']) }"
+                        required>
+                    <div *ngIf="f['email']['errors'] && (f['email']['dirty'] || f['email']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['email']['errors']['required']">Email is required</div>
+                        <div *ngIf="f['email']['errors']['email']">Email is not valid!</div>
+                    </div>
+                </div>
+
+                <!-- =================== -->
+
+                <div class="col-12">
+                    <label class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        formControlName="password" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['password']['invalid'] && (f['password']['dirty'] || f['password']['touched']) }"
+                        required>
+                    <div *ngIf="f['password']['errors'] && (f['password']['dirty'] || f['password']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['password']['errors']['required']">password is required</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Confirm password</label>
+                    <input 
+                        type="password" 
+                        formControlName="confirmPassword" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['confirmPassword']['invalid'] && (f['confirmPassword']['dirty'] || f['confirmPassword']['touched']) }"
+                        required>
+                    <div *ngIf="f['confirmPassword']['errors'] && (f['confirmPassword']['dirty'] || f['confirmPassword']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['confirmPassword']['errors']['required']">Confirm password is required</div>
+                        <div *ngIf="f['confirmPassword']['errors']['mismatch']">Password does not match</div>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <!-- <button 
+                        type="submit" 
+                        class="btn btn-outline-primary" 
+                        [disabled]="!form.valid">
+                        Save
+                    </button> -->
+                    <button 
+                        type="submit" 
+                        class="btn btn-outline-primary">
+                        Save
+                    </button>
+                    <button 
+                        style="margin-left: 10px;"
+                        type="button" 
+                        (click)="previousState()" 
+                        class="btn btn-outline-secondary">
+                        Back
+                    </button>
+                    <button #reset hidden type="reset">reset</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

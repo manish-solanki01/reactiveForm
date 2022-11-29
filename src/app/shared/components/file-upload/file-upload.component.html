@@ -1,0 +1,32 @@
+<div class="img-upload">
+  <div class="col-file">
+    <button 
+      class="imgUploadBtn" 
+      [class.image-selected]="imgSelected" 
+      type="button" 
+      (click)="fileInput.click()">
+      <img [src]="imageSrc" alt="img" />
+      <input
+        #fileInput
+        class="d-none"
+        type="file"
+        (change)="onFileChange($event)"
+      />
+    </button>
+  </div>
+  <div class="col-btn">
+    <button 
+      type="button" 
+      class="btn btn-outline-primary mb-2" 
+      [disabled]="!imgSelected"
+      (click)="onSubmit()">Upload
+    </button>
+    <button 
+      type="button" 
+      class="btn btn-outline-secondary" 
+      (click)="onCancel()">Cancel
+    </button>
+  </div>
+</div>
+
+<app-alert></app-alert>
